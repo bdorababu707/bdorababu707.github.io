@@ -571,63 +571,210 @@
       text-transform: uppercase;
     }
 
+    /* ─── NEW CYBER ORB ANIMATION ─── */
+    /* ─── PREMIUM NEURAL CORE STYLES ─── */
     .hero-orb {
       position: absolute;
-      right: 4%;
+      right: 5%;
       top: 50%;
       transform: translateY(-50%);
-      width: clamp(220px, 32vw, 400px);
-      height: clamp(220px, 32vw, 400px);
+      width: clamp(280px, 35vw, 450px);
+      height: clamp(280px, 35vw, 450px);
+      perspective: 1000px;
       z-index: 1;
       opacity: 0;
-      animation: fadeIn 1.4s 1s forwards;
+      animation: fadeIn 1.5s 1s forwards, floatHero 8s ease-in-out infinite;
     }
 
-    .orb-ring {
+    @keyframes floatHero {
+
+      0%,
+      100% {
+        transform: translateY(-50%) rotateX(0deg) rotateY(0deg);
+      }
+
+      50% {
+        transform: translateY(-53%) rotateX(5deg) rotateY(5deg);
+      }
+    }
+
+    /* Rings with Glassmorphism */
+    .premium-ring {
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      border: 1px solid rgba(0, 212, 255, 0.08);
-      animation: spin 24s linear infinite;
+      border: 1.5px solid rgba(0, 212, 255, 0.1);
+      backdrop-filter: blur(2px);
     }
 
-    .orb-ring:nth-child(2) {
-      inset: 18%;
-      border-color: rgba(124, 58, 237, 0.10);
-      animation-duration: 16s;
+    .ring-outer {
+      animation: spin 25s linear infinite;
+      border-top-color: var(--accent);
+    }
+
+    .ring-middle {
+      inset: 15%;
+      border: 1px dashed rgba(124, 58, 237, 0.3);
+      animation: spin 20s linear infinite reverse;
+    }
+
+    .ring-inner {
+      inset: 30%;
+      border: 2px solid rgba(6, 255, 165, 0.05);
+      border-bottom-color: var(--accent3);
+      animation: spin 15s ease-in-out infinite;
+    }
+
+    /* Energy Streams */
+    .energy-stream {
+      position: absolute;
+      inset: -10px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent, var(--accent), transparent 60%);
+      mask: radial-gradient(circle, transparent 65%, black 66%);
+      -webkit-mask: radial-gradient(circle, transparent 65%, black 66%);
+      opacity: 0.3;
+      animation: spin 4s linear infinite;
+    }
+
+    .stream-2 {
+      animation-duration: 6s;
       animation-direction: reverse;
+      background: conic-gradient(from 180deg, transparent, var(--accent2), transparent 60%);
+      opacity: 0.2;
     }
 
-    .orb-ring:nth-child(3) {
-      inset: 36%;
-      border-color: rgba(6, 255, 165, 0.07);
-      animation-duration: 10s;
-    }
-
-    .orb-core {
+    /* 3D Core Cube - Represents the Backend Engine */
+    .neural-core {
       position: absolute;
-      inset: 40%;
-      background: radial-gradient(circle, rgba(0, 212, 255, 0.25), rgba(124, 58, 237, 0.15), transparent);
-      border-radius: 50%;
-      animation: pulse 4s ease-in-out infinite;
+      inset: 38%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .orb-dot {
-      position: absolute;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      top: 50%;
-      left: 2%;
-      transform-origin: 200px center;
-      animation: orbit 8s linear infinite;
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    .core-cube {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateCube 10s linear infinite;
     }
 
-    @keyframes orbit {
+    @keyframes rotateCube {
       to {
-        transform: rotate(360deg);
+        transform: rotateX(360deg) rotateY(360deg);
+      }
+    }
+
+    .cube-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid var(--accent);
+      box-shadow: inset 0 0 10px var(--accent);
+    }
+
+    .front {
+      transform: translateZ(20px);
+    }
+
+    .back {
+      transform: rotateY(180deg) translateZ(20px);
+    }
+
+    .right {
+      transform: rotateY(90deg) translateZ(20px);
+    }
+
+    .left {
+      transform: rotateY(-90deg) translateZ(20px);
+    }
+
+    .top {
+      transform: rotateX(90deg) translateZ(20px);
+    }
+
+    .bottom {
+      transform: rotateX(-90deg) translateZ(20px);
+    }
+
+    .core-glow {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, var(--accent), transparent 70%);
+      opacity: 0.4;
+      filter: blur(20px);
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.3;
+      }
+
+      50% {
+        transform: scale(1.5);
+        opacity: 0.6;
+      }
+    }
+
+    /* Processing Particles */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      border-radius: 50%;
+      filter: blur(1px);
+    }
+
+    .p1 {
+      top: 20%;
+      left: 20%;
+      animation: moveP 4s infinite;
+      background: var(--accent);
+    }
+
+    .p2 {
+      top: 70%;
+      left: 80%;
+      animation: moveP 5s infinite reverse;
+      background: var(--accent2);
+    }
+
+    .p3 {
+      top: 10%;
+      left: 60%;
+      animation: moveP 6s infinite 1s;
+      background: var(--accent3);
+    }
+
+    .p4 {
+      top: 80%;
+      left: 30%;
+      animation: moveP 4s infinite 0.5s;
+      background: var(--gold);
+    }
+
+    @keyframes moveP {
+      0% {
+        transform: translate(0, 0);
+        opacity: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(50px, -50px);
+        opacity: 0;
       }
     }
 
@@ -637,17 +784,123 @@
       }
     }
 
-    @keyframes pulse {
+    /* Floating Effect */
+    @keyframes floatOrb {
 
       0%,
       100% {
-        opacity: 0.5;
-        transform: scale(1)
+        transform: translateY(-50%) translateX(0);
       }
 
       50% {
+        transform: translateY(-54%) translateX(-15px);
+      }
+    }
+
+    .orb-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 212, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ring-1 {
+      inset: 0;
+      animation: spin 20s linear infinite;
+    }
+
+    .ring-2 {
+      inset: 16%;
+      border-color: rgba(124, 58, 237, 0.12);
+      animation: spin 15s linear infinite reverse;
+    }
+
+    .ring-3 {
+      inset: 32%;
+      border-color: rgba(6, 255, 165, 0.08);
+      animation: spin 10s linear infinite;
+    }
+
+    /* Data Flow Nodes */
+    .data-node {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .n1 {
+      background: var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .n2 {
+      background: var(--accent2);
+      box-shadow: 0 0 15px var(--accent2);
+      top: auto;
+      bottom: -4px;
+    }
+
+    .n3 {
+      background: var(--accent3);
+      box-shadow: 0 0 15px var(--accent3);
+      left: auto;
+      right: -4px;
+      top: 50%;
+    }
+
+    .orb-core {
+      position: absolute;
+      inset: 42%;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.2), transparent 75%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .core-inner {
+      width: 35%;
+      height: 35%;
+      background: var(--accent);
+      border-radius: 2px;
+      transform: rotate(45deg);
+      animation: pulseCore 3s ease-in-out infinite;
+      box-shadow: 0 0 30px var(--accent);
+    }
+
+    /* Radar Scan Sweep */
+    .orb-scan {
+      position: absolute;
+      inset: -10px;
+      background: conic-gradient(from 0deg, transparent, rgba(0, 212, 255, 0.1), transparent 40%);
+      border-radius: 50%;
+      animation: spin 4s linear infinite;
+    }
+
+    @keyframes pulseCore {
+
+      0%,
+      100% {
+        transform: rotate(45deg) scale(1);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: rotate(225deg) scale(1.2);
         opacity: 1;
-        transform: scale(1.15)
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
       }
     }
 
@@ -1960,12 +2213,37 @@
         </div>
       </div>
     </div>
+
+    <!-- ─── UPDATED HERO ORB ─── -->
+    <!-- ─── PREMIUM NEURAL CORE ANIMATION ─── -->
     <div class="hero-orb" aria-hidden="true">
-      <div class="orb-ring"></div>
-      <div class="orb-ring"></div>
-      <div class="orb-ring"></div>
-      <div class="orb-core"></div>
-      <div class="orb-dot"></div>
+      <!-- 3D Depth Rings -->
+      <div class="premium-ring ring-outer"></div>
+      <div class="premium-ring ring-middle"></div>
+      <div class="premium-ring ring-inner"></div>
+
+      <!-- Energy Streams -->
+      <div class="energy-stream stream-1"></div>
+      <div class="energy-stream stream-2"></div>
+
+      <!-- The Central Backend Core -->
+      <div class="neural-core">
+        <div class="core-cube">
+          <div class="cube-face front"></div>
+          <div class="cube-face back"></div>
+          <div class="cube-face right"></div>
+          <div class="cube-face left"></div>
+          <div class="cube-face top"></div>
+          <div class="cube-face bottom"></div>
+        </div>
+        <div class="core-glow"></div>
+      </div>
+
+      <!-- Processing Particles -->
+      <div class="particle p1"></div>
+      <div class="particle p2"></div>
+      <div class="particle p3"></div>
+      <div class="particle p4"></div>
     </div>
   </section>
 
